@@ -6,12 +6,16 @@ namespace TemirkhanN\Generic;
 
 /**
  * @template T
+ * @template E
  */
 interface ResultInterface
 {
     public function isSuccessful(): bool;
 
-    public function getError(): string;
+    /**
+     * @return E
+     */
+    public function getError();
 
     /**
      * @return T

@@ -25,7 +25,6 @@ class ResultTest extends TestCase
         $result = Result::success(['Some data']);
 
         self::assertTrue($result->isSuccessful());
-        self::assertEmpty($result->getError());
         self::assertEquals(['Some data'], $result->getData());
     }
 }

@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace TemirkhanN\Generic;
 
+use RuntimeException;
+
 /**
  * @template T
- * @implements ResultInterface<T>
+ * @template E
+ *
+ * @implements ResultInterface<T, E>
  */
 final class Result implements ResultInterface
 {
-    private string $error = '';
+    /**
+     * @var ?E
+     */
+    private $error = null;
 
     /**
      * @var T
@@ -24,9 +31,11 @@ final class Result implements ResultInterface
     /**
      * phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
      *
-     * @param T $data
+     * @template DT
      *
-     * @return static<T>
+     * @param DT $data
+     *
+     * @return static<DT, E>
      */
     public static function success($data = null): self
     {
@@ -38,16 +47,14 @@ final class Result implements ResultInterface
     }
 
     /**
-     * @param string $error
+     * @template Err
      *
-     * @return static<T>
+     * @param Err $error
+     *
+     * @return static<T, Err>
      */
-    public static function error(string $error): self
+    public static function error($error): self
     {
-        if ($error === '') {
-            throw new Exception\RuntimeException('Error shall contain some valid(non-empty) message');
-        }
-
         $result        = new self();
         $result->error = $error;
 
@@ -56,21 +63,22 @@ final class Result implements ResultInterface
 
     public function isSuccessful(): bool
     {
-        return $this->error === '';
+        return $this->error === null;
     }
 
-    public function getError(): string
+    public function getError()
     {
+        if ($this->error === null) {
+            throw new RuntimeException('This is not an error result. Consider using isSuccessful');
+        }
+
         return $this->error;
     }
 
-    /**
-     * @return T
-     */
     public function getData()
     {
         if(!$this->isSuccessful()) {
-            throw new \RuntimeException('This is an error result. It contains no data.');
+            throw new RuntimeException('This is an error result. Consider using isSuccessful.');
         }
 
         return $this->data;

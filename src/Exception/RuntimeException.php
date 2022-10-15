@@ -7,7 +7,7 @@ namespace TemirkhanN\Generic\Exception;
 /**
  * This error shall lead to direct fix in the code
  */
-class RuntimeException extends Exception
+class RuntimeException extends \RuntimeException
 {
 
 }

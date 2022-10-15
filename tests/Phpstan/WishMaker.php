@@ -12,7 +12,7 @@ use TemirkhanN\Generic\ResultInterface;
 class WishMaker
 {
     /**
-     * @return ResultInterface<WishPromise>
+     * @return ResultInterface<WishPromise, string>
      */
     public function pleaseAddNativeGenerics(): ResultInterface
     {
