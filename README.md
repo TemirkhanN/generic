@@ -41,7 +41,9 @@ class WishMaker
      * Still, it is fully valid - attempt to get it will end up with exception.  
      * Result should always be checked for `isSuccessful` state. 
      *
-     * @return ResultInterface<WishPromise>
+     * Result is either successful and contains getData() => WishPromise xor failure and contains getError() => string
+     *
+     * @return ResultInterface<WishPromise, string>
      */
     public function pleaseAddNativeGenerics(): ResultInterface
     {
@@ -131,3 +133,30 @@ class Highlighter
 }
 ```
 
+**WARNING**: this wrapper by design can not declare both types(data and error) at the same time. It means, that after
+`Result::success(type)` or `Result::error(type)` we have one of the types `mixed`
+
+```php
+
+class SomeData{}
+
+class SomeError {}
+
+/**
+ * @return Result<SomeData, SomeError>
+ */
+function makeAWish(): Result {
+    if (date('w') === 0) {
+        // return type will be Result<mixed, SomeError>
+        // which does not contravariant with function declaration
+        return Result::error(new SomeError());
+    }
+
+    // return type will be Result<SomeData, mixed>
+    // which also does not contravariant with function declaration
+    return Result::success(new SomeData());
+}
+
+```
+
+Both `return` will fail for PHPStan validation of level higher than 8 due to that reason.
