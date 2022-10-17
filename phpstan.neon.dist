@@ -1,3 +1,5 @@
+includes:
+  - extension.neon
 parameters:
   level: 9
   tmpDir: '%currentWorkingDirectory%/.phpstan'
@@ -9,5 +11,3 @@ parameters:
   parallel:
     processTimeout: 60.0
     maximumNumberOfProcesses: 4
-  ignoreErrors:
-    - '#should return TemirkhanN\\Generic\\ResultInterface<.+?> but returns TemirkhanN\\Generic\\Result<mixed>#'

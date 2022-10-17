@@ -1,0 +1,3 @@
+parameters:
+  ignoreErrors:
+    - '#should return TemirkhanN\\Generic\\ResultInterface<.+?> but returns TemirkhanN\\Generic\\Result<mixed>#'

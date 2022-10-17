@@ -161,3 +161,11 @@ parameters:
   ignoreErrors:
     - '#should return TemirkhanN\\Generic\\ResultInterface<.+?> but returns TemirkhanN\\Generic\\Result<mixed>#'
 ```
+
+or include rules directly
+
+```yaml
+# phpstan.neon.dist
+includes:
+  - vendor/temirkhann/generic/extension.neon
+```
