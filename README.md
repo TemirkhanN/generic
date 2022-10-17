@@ -41,14 +41,12 @@ class WishMaker
      * Still, it is fully valid - attempt to get it will end up with exception.  
      * Result should always be checked for `isSuccessful` state. 
      *
-     * Result is either successful and contains getData() => WishPromise xor failure and contains getError() => string
-     *
-     * @return ResultInterface<WishPromise, string>
+     * @return ResultInterface<WishPromise>
      */
     public function pleaseAddNativeGenerics(): ResultInterface
     {
         return Result::error(
-            'We have much more important things to do. Named parameters, breaking Liskov and stuff.'
+            Error::create('We have much more important things to do. Named parameters, breaking Liskov and stuff.')
         );
     }
 }
@@ -133,30 +131,33 @@ class Highlighter
 }
 ```
 
-**WARNING**: this wrapper by design can not declare both types(data and error) at the same time. It means, that after
-`Result::success(type)` or `Result::error(type)` we have one of the types `mixed`
+## Known issues
+
+`ResultInterface` by design can not detect type in case of error for there is no type passed.  
+
+It means, that after `Result::error(...)` there is no data type declared and thus getData() is considered mixed. 
 
 ```php
+<?php
 
-class SomeData{}
-
-class SomeError {}
-
-/**
- * @return Result<SomeData, SomeError>
- */
-function makeAWish(): Result {
-    if (date('w') === 0) {
-        // return type will be Result<mixed, SomeError>
-        // which does not contravariant with function declaration
-        return Result::error(new SomeError());
+class WishMaker
+{
+    /**
+     * @return ResultInterface<WishPromise>
+     */
+    public function pleaseAddNativeGenerics(): ResultInterface
+    {
+        // Generic can not determine the data type, so it will not match ResultInterface<WishPromise>
+        return Result::error(Error::create('Nope'));
     }
-
-    // return type will be Result<SomeData, mixed>
-    // which also does not contravariant with function declaration
-    return Result::success(new SomeData());
 }
 
 ```
 
-Both `return` will fail for PHPStan validation of level higher than 8 due to that reason.
+If you use PHPStan lvl9+ you can add this particular error to ignore  
+```yaml
+# phpstan.neon.dist
+parameters:
+  ignoreErrors:
+    - '#should return TemirkhanN\\Generic\\ResultInterface<.+?> but returns TemirkhanN\\Generic\\Result<mixed>#'
+```

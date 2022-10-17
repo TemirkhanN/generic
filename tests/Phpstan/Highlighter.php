@@ -13,7 +13,7 @@ class Highlighter
         $result = $service->pleaseAddNativeGenerics();
 
         if ($result->isSuccessful()) {
-            $fulfillmentDate = $result->getData()->willBeFulfilledAt;
+            $fulfillmentDate = $result->getData()->fulfilledAt();
 
             printf('OMG! Santa will add this at %s!', $fulfillmentDate->format('d-m-Y'));
         } else {
@@ -30,8 +30,8 @@ class Highlighter
         foreach ($goodWishesThatWereFulfilled as $fulfilledWish) {
             printf(
                 '%s was fulfilled on %s' . PHP_EOL,
-                $fulfilledWish->wishName,
-                $fulfilledWish->willBeFulfilledAt->format('d-m-Y')
+                $fulfilledWish->name(),
+                $fulfilledWish->fulfilledAt()->format('d-m-Y')
             );
         }
     }

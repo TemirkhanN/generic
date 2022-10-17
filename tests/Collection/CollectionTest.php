@@ -6,7 +6,6 @@ namespace Test\TemirkhanN\Generic\Collection;
 
 use PHPUnit\Framework\TestCase;
 use TemirkhanN\Generic\Collection\Collection;
-use TemirkhanN\Generic\Collection\CollectionInterface;
 use TemirkhanN\Generic\Internal\Iterating;
 
 class CollectionTest extends TestCase

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Test\TemirkhanN\Generic\Phpstan;
 
-class WishPromise
+use DateTimeInterface;
+
+class WishPromise implements PromiseInterface
 {
     public string $wishName;
     public \DateTime $willBeFulfilledAt;
@@ -13,5 +15,15 @@ class WishPromise
     {
         $this->wishName = $wishName;
         $this->willBeFulfilledAt = $willBeFulfilledAt;
+    }
+
+    public function name(): string
+    {
+        return $this->wishName;
+    }
+
+    public function fulfilledAt(): DateTimeInterface
+    {
+        return $this->willBeFulfilledAt;
     }
 }

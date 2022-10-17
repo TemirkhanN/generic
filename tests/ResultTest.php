@@ -5,16 +5,21 @@ declare(strict_types=1);
 namespace Test\TemirkhanN\Generic;
 
 use PHPUnit\Framework\TestCase;
+use TemirkhanN\Generic\Error;
 use TemirkhanN\Generic\Result;
 
 class ResultTest extends TestCase
 {
     public function testError(): void
     {
-        $result = Result::error('Some error message');
+        $result = Result::error(Error::create('Some error message', 23, ['some' => 'details', 1 => 'here']));
 
         self::assertFalse($result->isSuccessful());
-        self::assertEquals('Some error message', $result->getError());
+
+        $error = $result->getError();
+        self::assertEquals('Some error message', $error->getMessage());
+        self::assertEquals(23, $error->getCode());
+        self::assertEquals(['some' => 'details', 1 => 'here'], $error->getDetails());
 
         self::expectException(\RuntimeException::class);
         $result->getData();

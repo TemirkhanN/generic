@@ -7,17 +7,13 @@ namespace TemirkhanN\Generic;
 use RuntimeException;
 
 /**
- * @template T
- * @template E
+ * @template-covariant T
  *
- * @implements ResultInterface<T, E>
+ * @implements ResultInterface<T>
  */
 final class Result implements ResultInterface
 {
-    /**
-     * @var ?E
-     */
-    private $error = null;
+    private ErrorInterface $error;
 
     /**
      * @var T
@@ -26,20 +22,18 @@ final class Result implements ResultInterface
 
     private function __construct()
     {
+        $this->error = Error::none();
     }
 
     /**
-     * phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
-     *
      * @template DT
      *
      * @param DT $data
      *
-     * @return static<DT, E>
+     * @return static<DT>
      */
     public static function success($data = null): self
     {
-        // phpcs:enable
         $result       = new self();
         $result->data = $data;
 
@@ -47,13 +41,11 @@ final class Result implements ResultInterface
     }
 
     /**
-     * @template Err
+     * @param ErrorInterface $error
      *
-     * @param Err $error
-     *
-     * @return static<T, Err>
+     * @return self<mixed>
      */
-    public static function error($error): self
+    public static function error(ErrorInterface $error): self
     {
         $result        = new self();
         $result->error = $error;
@@ -63,15 +55,11 @@ final class Result implements ResultInterface
 
     public function isSuccessful(): bool
     {
-        return $this->error === null;
+        return $this->error->getMessage() === '';
     }
 
-    public function getError()
+    public function getError(): ErrorInterface
     {
-        if ($this->error === null) {
-            throw new RuntimeException('This is not an error result. Consider using isSuccessful');
-        }
-
         return $this->error;
     }
 

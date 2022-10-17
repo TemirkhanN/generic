@@ -8,7 +8,7 @@ use TemirkhanN\Generic\Internal;
 use Traversable;
 
 /**
- * @template   T
+ * @template-covariant T
  * @implements CollectionInterface<T>
  */
 final class Collection implements CollectionInterface

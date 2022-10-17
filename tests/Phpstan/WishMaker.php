@@ -6,23 +6,24 @@ namespace Test\TemirkhanN\Generic\Phpstan;
 
 use TemirkhanN\Generic\Collection\Collection;
 use TemirkhanN\Generic\Collection\CollectionInterface;
+use TemirkhanN\Generic\Error;
 use TemirkhanN\Generic\Result;
 use TemirkhanN\Generic\ResultInterface;
 
 class WishMaker
 {
     /**
-     * @return ResultInterface<WishPromise, string>
+     * @return ResultInterface<PromiseInterface>
      */
     public function pleaseAddNativeGenerics(): ResultInterface
     {
         return Result::error(
-            'We have much more important things to do. Named parameters, breaking Liskov and stuff.'
+            Error::create('We have much more important things to do. Named parameters, breaking Liskov and stuff.')
         );
     }
 
     /**
-     * @return CollectionInterface<WishPromise>
+     * @return CollectionInterface<PromiseInterface>
      */
     public function showMeSomeGoodWishes(): CollectionInterface
     {

@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace TemirkhanN\Generic;
 
 /**
- * @template T
- * @template E
+ * @template-covariant T
  */
 interface ResultInterface
 {
     public function isSuccessful(): bool;
 
     /**
-     * @return E
+     * @return ErrorInterface
      */
-    public function getError();
+    public function getError(): ErrorInterface;
 
     /**
      * @return T

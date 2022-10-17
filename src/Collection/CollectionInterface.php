@@ -8,7 +8,7 @@ use IteratorAggregate;
 use Traversable;
 
 /**
- * @template T
+ * @template-covariant T
  * @extends IteratorAggregate<T>
  */
 interface CollectionInterface extends IteratorAggregate
