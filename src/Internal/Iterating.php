@@ -10,13 +10,13 @@ namespace TemirkhanN\Generic\Internal;
 class Iterating
 {
     /**
-     * @template K of string|int
      * @template T
      *
-     * @param iterable<K, T> $iterable
-     * @return array<K, T>
+     * @param iterable<T> $iterable
+     *
+     * @return array<T>
      */
-    public static function toArray(iterable $iterable, bool $preserveKeys = true): array
+    public static function toArray(iterable $iterable): array
     {
         $result = [];
         if (!is_array($iterable)) {
@@ -25,10 +25,6 @@ class Iterating
             }
         } else {
             $result = $iterable;
-        }
-
-        if ($preserveKeys) {
-            return $result;
         }
 
         return array_values($result);

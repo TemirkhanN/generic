@@ -19,27 +19,21 @@ final class Collection implements CollectionInterface
     private array $items;
 
     /**
-     * @param iterable<string|int, T> $items
+     * @param iterable<T> $items
      */
     public function __construct(iterable $items)
     {
-        $this->items = Internal\Iterating::toArray($items, false);
+        $this->items = Internal\Iterating::toArray($items);
     }
 
-    /**
-     * @return Traversable<int, T>
-     */
     public function getIterator(): Traversable
     {
         yield from $this->items;
     }
 
-    /**
-     * @return array<int, T>
-     */
     public function items(): array
     {
-        return Internal\Iterating::toArray($this->getIterator(), false);
+        return $this->items;
     }
 
     public function isEmpty(): bool
