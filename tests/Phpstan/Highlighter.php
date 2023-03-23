@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Test\TemirkhanN\Generic\Phpstan;
 
+use TemirkhanN\Generic\Result;
+use TemirkhanN\Generic\ResultInterface;
+
 class Highlighter
 {
     public function grantFirstWish(): void
@@ -34,5 +37,13 @@ class Highlighter
                 $fulfilledWish->fulfilledAt()->format('d-m-Y')
             );
         }
+    }
+
+    /**
+     * @return ResultInterface<void>
+     */
+    public function ignoreVoidResult(): ResultInterface
+    {
+        return Result::success();
     }
 }
