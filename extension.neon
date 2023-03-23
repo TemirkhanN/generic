@@ -1,3 +1,4 @@
 parameters:
   ignoreErrors:
     - '#should return TemirkhanN\\Generic\\ResultInterface<.+?> but returns TemirkhanN\\Generic\\Result<mixed>#'
+    - '#should return TemirkhanN\\Generic\\ResultInterface<void> but returns TemirkhanN\\Generic\\Result<null>#'
