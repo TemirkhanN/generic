@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace TemirkhanN\Generic;
 
 use Countable;
+use IteratorAggregate;
 
 /**
  * @template Key
  * @template Val
+ *
+ * @extends IteratorAggregate<Key,Val>
  */
-interface MapInterface extends Countable
+interface MapInterface extends Countable, IteratorAggregate
 {
     /**
      * @param Key $key

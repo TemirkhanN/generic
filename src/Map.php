@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace TemirkhanN\Generic;
 
 
+use Exception;
+use Traversable;
+
 /**
  * @template Key
  * @template Val
@@ -71,6 +74,14 @@ final class Map implements MapInterface
     public function values(): array
     {
         return array_values($this->entries);
+    }
+
+    /**
+     * @return Traversable<Val>
+     */
+    public function getIterator()
+    {
+        yield from $this->entries;
     }
 
     /**
