@@ -11,7 +11,7 @@ use IteratorAggregate;
  * @template Key
  * @template Val
  *
- * @extends IteratorAggregate<Key,Val>
+ * @extends IteratorAggregate<Val>
  */
 interface MapInterface extends Countable, IteratorAggregate
 {

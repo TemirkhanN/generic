@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace TemirkhanN\Generic;
 
-
-use Exception;
 use Traversable;
 
 /**
@@ -79,7 +77,7 @@ final class Map implements MapInterface
     /**
      * @return Traversable<Val>
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         yield from $this->entries;
     }
