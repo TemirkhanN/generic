@@ -16,8 +16,6 @@ Personally I'm tired of checked exception usage, and thus it lead me to command 
 
 declare(strict_types=1);
 
-use TemirkhanN\Generic\Collection\Collection;
-use TemirkhanN\Generic\Collection\CollectionInterface;
 use TemirkhanN\Generic\Result;
 use TemirkhanN\Generic\ResultInterface;
 

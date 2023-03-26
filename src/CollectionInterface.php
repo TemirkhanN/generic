@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TemirkhanN\Generic\Collection;
+namespace TemirkhanN\Generic;
 
 use IteratorAggregate;
 use Traversable;

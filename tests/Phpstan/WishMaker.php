@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Test\TemirkhanN\Generic\Phpstan;
 
-use TemirkhanN\Generic\Collection\Collection;
-use TemirkhanN\Generic\Collection\CollectionInterface;
+use TemirkhanN\Generic\Collection;
+use TemirkhanN\Generic\CollectionInterface;
 use TemirkhanN\Generic\Error;
 use TemirkhanN\Generic\Result;
 use TemirkhanN\Generic\ResultInterface;

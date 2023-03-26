@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Test\TemirkhanN\Generic\Collection;
+namespace Test\TemirkhanN\Generic;
 
 use PHPUnit\Framework\TestCase;
-use TemirkhanN\Generic\Collection\Collection;
+use TemirkhanN\Generic\Collection;
 use TemirkhanN\Generic\Internal\Iterating;
 
 class CollectionTest extends TestCase
@@ -27,6 +27,13 @@ class CollectionTest extends TestCase
         self::assertIterableEqualsToArray(['value', 'another value'], $collection);
     }
 
+    /**
+     * @param array<mixed> $expected
+     * @param iterable<mixed> $actual
+     *
+     *
+     * @return void
+     */
     public static function assertIterableEqualsToArray(array $expected, iterable $actual): void
     {
         self::assertEquals($expected, Iterating::toArray($actual));
