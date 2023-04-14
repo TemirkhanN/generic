@@ -9,7 +9,7 @@ use Traversable;
 
 /**
  * @template-covariant T
- * @extends IteratorAggregate<T>
+ * @extends IteratorAggregate<array-key, T>
  */
 interface CollectionInterface extends IteratorAggregate
 {
@@ -21,7 +21,7 @@ interface CollectionInterface extends IteratorAggregate
     public function items(): array;
 
     /**
-     * @return Traversable<T>
+     * @return Traversable<array-key, T>
      */
     public function getIterator(): Traversable;
 

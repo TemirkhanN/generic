@@ -75,7 +75,7 @@ final class Map implements MapInterface
     }
 
     /**
-     * @return Traversable<Val>
+     * @return Traversable<array-key, Val>
      */
     public function getIterator(): Traversable
     {

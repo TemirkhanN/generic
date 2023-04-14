@@ -19,7 +19,7 @@ final class Collection implements CollectionInterface
     private array $items;
 
     /**
-     * @param iterable<T> $items
+     * @param iterable<array-key, T> $items
      */
     public function __construct(iterable $items)
     {
@@ -27,7 +27,7 @@ final class Collection implements CollectionInterface
     }
 
     /**
-     * @return Traversable<T>
+     * @return Traversable<array-key, T>
      */
     public function getIterator(): Traversable
     {
