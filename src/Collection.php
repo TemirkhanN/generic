@@ -26,6 +26,9 @@ final class Collection implements CollectionInterface
         $this->items = Internal\Iterating::toArray($items);
     }
 
+    /**
+     * @return Traversable<T>
+     */
     public function getIterator(): Traversable
     {
         yield from $this->items;
