@@ -19,7 +19,7 @@ final class Map implements MapInterface
     private const KEY_TYPE_OBJECT = 3;
 
     /**
-     * @var array<string, Val>
+     * @var array<array{key: Key, value: Val}>
      */
     private array $entries = [];
 
@@ -32,7 +32,13 @@ final class Map implements MapInterface
      */
     public function get($key)
     {
-        return $this->entries[$this->getKeyHash($key)] ?? null;
+        $data = $this->entries[$this->getKeyHash($key)] ?? null;
+
+        if ($data === null) {
+            return null;
+        }
+
+        return $data['value'];
     }
 
     /**
@@ -47,13 +53,13 @@ final class Map implements MapInterface
 
     /**
      * @param Key $key
-     * @param Val $value
+     * @param Val $element
      *
      * @return void
      */
-    public function set($key, $value): void
+    public function set($key, $element): void
     {
-        $this->entries[$this->getKeyHash($key)] = $value;
+        $this->entries[$this->getKeyHash($key)] = ['key' => $key, 'value' => $element];
     }
 
     public function isEmpty(): bool
@@ -71,15 +77,17 @@ final class Map implements MapInterface
      */
     public function values(): array
     {
-        return array_values($this->entries);
+        return array_column($this->entries, 'value');
     }
 
     /**
-     * @return Traversable<array-key, Val>
+     * @return Traversable<Key, Val>
      */
     public function getIterator(): Traversable
     {
-        yield from $this->entries;
+        foreach ($this->entries as $entry) {
+            yield $entry['key'] => $entry['value'];
+        }
     }
 
     /**
