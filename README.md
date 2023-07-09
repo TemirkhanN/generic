@@ -9,6 +9,26 @@ While we are waiting for a native generics support it is a good idea to try the 
 
 Personally I'm tired of checked exception usage, and thus it lead me to command result usage.  
 
+### WARNING
+
+Starting with php8.0 union types are more effective than this approach. It is twice as efficient and has better/native highlight.  
+
+```php
+<?php
+
+function addComment(...): Comment|Error {}
+
+$result = addComment();
+if ($result instanceof Error) {
+    // showError
+} else {
+    // showComment
+}
+
+```
+
+I'd highly recommend using union types for this purpose rather than generic-type since the latter has a few obvious drawbacks.
+
 ## Result
 
 ```php
